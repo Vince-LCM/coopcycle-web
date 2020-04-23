@@ -55,7 +55,13 @@ class UpdateStateTest extends TestCase
         $order = new Order();
         $payment = new Payment();
 
-        $this->stateMachine->can('authorize')->willReturn(true);
+        $this->stateMachine
+            ->can('authorize')
+            ->willReturn(true);
+
+        $this->stateMachine
+            ->apply('authorize')
+            ->shouldBeCalled();
 
         $this->eventBus
             ->handle(Argument::that(function (Event\OrderCreated $event) use ($order) {
@@ -64,8 +70,6 @@ class UpdateStateTest extends TestCase
             ->shouldBeCalled();
 
         call_user_func_array($this->updateState, [ new Event\CheckoutSucceeded($order, $payment) ]);
-
-        $this->stateMachine->apply('authorize')->shouldHaveBeenCalled();
     }
 
     public function testCheckoutFailed()
