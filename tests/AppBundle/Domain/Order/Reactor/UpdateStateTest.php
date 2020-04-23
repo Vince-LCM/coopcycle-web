@@ -55,6 +55,8 @@ class UpdateStateTest extends TestCase
         $order = new Order();
         $payment = new Payment();
 
+        $this->stateMachine->can('authorize')->willReturn(true);
+
         $this->eventBus
             ->handle(Argument::that(function (Event\OrderCreated $event) use ($order) {
                 return $event->getOrder() === $order;

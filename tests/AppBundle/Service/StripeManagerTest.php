@@ -428,6 +428,7 @@ class StripeManagerTest extends TestCase
     {
         $source = Stripe\Source::constructFrom([
             'id' => 'src_12345678',
+            'type' => 'giropay',
             'client_secret' => '',
             'redirect' => [
                 'url' => 'http://example.com'
