@@ -336,7 +336,7 @@ class StripeManager
     /**
      * @return Stripe\Source
      */
-    public function createGiropaySource(PaymentInterface $payment)
+    public function createGiropaySource(PaymentInterface $payment, string $ownerName)
     {
         $this->configure();
 
@@ -353,7 +353,7 @@ class StripeManager
             'amount' => $payment->getAmount(),
             'currency' => strtolower($payment->getCurrencyCode()),
             'owner' => [
-                'name' => 'Johnny John'
+                'name' => $ownerName
             ],
             'redirect' => [
                 'return_url' => $returnUrl

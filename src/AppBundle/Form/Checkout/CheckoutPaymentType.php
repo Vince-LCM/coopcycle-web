@@ -80,8 +80,11 @@ class CheckoutPaymentType extends AbstractType
 
             if ('giropay' === $form->get('method')->getData()) {
 
+                $ownerName = $form->get('stripePayment')
+                    ->get('cardholderName')->getData();
+
                 // TODO Catch Exception (source not enabled)
-                $source = $this->stripeManager->createGiropaySource($payment);
+                $source = $this->stripeManager->createGiropaySource($payment, $ownerName);
 
                 $payment->setSource($source);
             }

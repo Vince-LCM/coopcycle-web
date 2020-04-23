@@ -125,14 +125,10 @@ export default function(form, options) {
     if (value === 'card') {
       card.mount('#card-element')
       document.getElementById('payment-redirect-help').classList.add('hidden')
-      options.cardholderNameElement.closest('.form-group').classList.remove('hidden')
-      options.cardholderNameElement.required = true
     } else {
       card.unmount()
       document.getElementById('card-errors').textContent = ''
       document.getElementById('payment-redirect-help').classList.remove('hidden')
-      options.cardholderNameElement.closest('.form-group').classList.add('hidden')
-      options.cardholderNameElement.removeAttribute('required')
       enableBtn(submitButton)
     }
   }
@@ -147,8 +143,6 @@ export default function(form, options) {
 
     const el = document.createElement('div')
     document.querySelector('#checkout_payment_method').appendChild(el)
-
-    options.cardholderNameElement.closest('.form-group').classList.add('hidden')
 
     render(
       <PaymentMethodPicker methods={ methods } onSelect={ onSelect } />,
